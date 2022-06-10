@@ -26,4 +26,8 @@ public class Compte {
 		this.solde = solde;
 	}
 	
+	@Override
+	public String toString() {
+		return "numero = " + numeroDuCompte + "; solde = " + solde;
+	}
 }
