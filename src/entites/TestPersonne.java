@@ -9,11 +9,8 @@ public class TestPersonne {
 
 		AdressePostale adr1 = new AdressePostale(23, "rue1", 34000, "Montpellier");
 
-		AdressePostale adr2 = new AdressePostale(68, "rue2", 36000, "Tour");
-
-		Personne personne1 = new Personne("toto", "tototo", adr1);
-		
-		Personne personne2 = new Personne("titi", "tititi", adr2);
+		Personne personne1 = new Personne("toto", "tototo");
+		personne1.setAdresse(adr1);
 	}
 
 }
