@@ -5,10 +5,26 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class Ville {
+public class TestVille {
 
-	private int hab;
-	private String nom;
+	public static class Ville {
+		public int hab;
+		public String nom;
+		/**
+		 * @param hab
+		 * @param nom
+		 */
+		public Ville(String nom, int hab) {
+			super();
+			this.hab = hab;
+			this.nom = nom;
+		}
+		
+		@Override
+		public String toString() {
+			return nom + ", " + hab + ".";
+		}
+	}
 	
 	public static void main(String[] args) {
 		List<Ville> villes = new ArrayList<>();
@@ -62,25 +78,11 @@ public class Ville {
 		afficherListe(villes);
 	}
 
-	/**
-	 * @param hab
-	 * @param nom
-	 */
-	public Ville(String nom, int hab) {
-		super();
-		this.hab = hab;
-		this.nom = nom;
-	}
 
 	public static <E> void afficherListe(List<E> liste) {
 		for (E e : liste) {
 			System.out.println(e);
 		}
-	}
-	
-	@Override
-	public String toString() {
-		return nom + ", " + hab + ".";
 	}
 	
 }
