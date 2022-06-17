@@ -3,7 +3,7 @@ package fichier;
 public class Ville {
 
 	private String nom;
-	private int codeDepartement;
+	private String codeDepartement;
 	private String nomRegion;
 	private int popTotale;
 	/**
@@ -12,7 +12,7 @@ public class Ville {
 	 * @param nomRegion
 	 * @param popTotale
 	 */
-	public Ville(String nom, int codeDepartement, String nomRegion, int popTotale) {
+	public Ville(String nom, String codeDepartement, String nomRegion, int popTotale) {
 		super();
 		this.nom = nom;
 		this.codeDepartement = codeDepartement;
@@ -30,7 +30,7 @@ public class Ville {
 	 * @return the relevant data in the writing format
 	 */
 	public String getData() {
-		return String.format("%s;%d;%s;%d", nom, codeDepartement, nomRegion, popTotale);
+		return String.format("%s;%s;%s;%d", nom, codeDepartement, nomRegion, popTotale);
 	}
 	
 	
@@ -43,7 +43,7 @@ public class Ville {
 	/**
 	 * @return the codeDepartement
 	 */
-	public int getCodeDepartement() {
+	public String getCodeDepartement() {
 		return codeDepartement;
 	}
 	/**
@@ -67,7 +67,7 @@ public class Ville {
 	/**
 	 * @param codeDepartement the codeDepartement to set
 	 */
-	public void setCodeDepartement(int codeDepartement) {
+	public void setCodeDepartement(String codeDepartement) {
 		this.codeDepartement = codeDepartement;
 	}
 	/**

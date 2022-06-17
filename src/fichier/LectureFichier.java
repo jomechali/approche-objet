@@ -25,7 +25,7 @@ public class LectureFichier {
 			for (String line : content) {
 
 				String[] data = line.split(";");
-				villes.add(new Ville(data[6], Integer.parseInt(data[0]), data[1], Integer.parseInt(data[9].replace(" ", ""))));
+				villes.add(new Ville(data[6], data[2], data[1], Integer.parseInt(data[9].replace(" ", ""))));
 			}
 		}
 		
@@ -39,7 +39,7 @@ public class LectureFichier {
 				
 			}
 		}
-		grandesVillesData.add(0, "Commune;Numero de Region;Region;Population totale");
+		grandesVillesData.add(0, "Commune;Numero de Departement;Region;Population totale");
 		Files.write(targetPath, grandesVillesData, StandardOpenOption.CREATE);
 
 	}
