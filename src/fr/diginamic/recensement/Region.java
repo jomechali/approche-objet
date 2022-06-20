@@ -30,6 +30,11 @@ public class Region extends ZoneDemographique {
 		}
 		return code == ((Region) obj).code;
 	}
+	
+	@Override
+	public String toString() {
+		return "Region [code=" + code + ", nom=" + nom + "]";
+	}
 
 	/**
 	 * @return the code
@@ -44,4 +49,5 @@ public class Region extends ZoneDemographique {
 	public String getNom() {
 		return nom;
 	}
+
 }

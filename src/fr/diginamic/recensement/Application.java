@@ -35,9 +35,11 @@ public class Application {
 				break;
 			case "4":
 				// new Service10RegionsplusPeuplees(recensement, view)
+				new AfficherRegionsPlusPeuplees().traiter(recensement, view);
 				break;
 			case "5":
 				// new Service10DepartementsPlusPeuples(recensement, view)
+				new AfficherDepartementsPlusPeuples().traiter(recensement, view);
 				break;
 			case "6":
 				// new Service10VillesDeDepartementPlusPeuplees(recensement, view)

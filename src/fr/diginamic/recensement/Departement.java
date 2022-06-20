@@ -28,6 +28,11 @@ public class Departement extends ZoneDemographique {
 		return code.equals(((Departement) obj).code);
 	}
 
+	@Override
+	public String toString() {
+		return "Departement [code=" + code + "]";
+	}
+
 	/**
 	 * @return the code
 	 */

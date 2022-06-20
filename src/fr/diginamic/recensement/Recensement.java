@@ -199,4 +199,27 @@ public class Recensement {
 
 	}
 
+	/**
+	 * @return the villes
+	 */
+	public List<Ville> getVilles() {
+		return villes;
+	}
+
+	/**
+	 * @return the departements
+	 */
+	public List<Departement> getDepartements() {
+		return departements;
+	}
+
+	/**
+	 * @return the regions
+	 */
+	public List<Region> getRegions() {
+		return regions;
+	}
+	
+	
+
 }
