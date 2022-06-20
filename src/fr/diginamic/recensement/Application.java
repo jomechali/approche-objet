@@ -11,38 +11,41 @@ public class Application {
 
 		View view = new View();
 
-		view.afficherMenuPrincipal();
-		
 		boolean leave = false;
+
 		while (!leave) {
+
+			view.afficherMenuPrincipal();
+
 			String entreeUtilisateur = view.getEntreeUtilisateur();
-			
+
 			switch (entreeUtilisateur) {
 			case "1":
-				//new ServiceAfficherVille().traiter(recensement, view)
+				// new ServiceAfficherVille().traiter(recensement, view)
 				new RechercherPopulationVille().traiter(recensement, view);
 				break;
 			case "2":
-				//new ServicePopDepartement(recensement, view)
+				// new ServicePopDepartement(recensement, view)
 				new RechercherPopulationDepartement().traiter(recensement, view);
 				break;
 			case "3":
-				//new ServicePopregion(recensement, view)
+				// new ServicePopregion(recensement, view)
+				new RechercherPopulationRegion().traiter(recensement, view);
 				break;
 			case "4":
-				//new Service10RegionsplusPeuplees(recensement, view)
+				// new Service10RegionsplusPeuplees(recensement, view)
 				break;
 			case "5":
-				//new Service10DepartementsPlusPeuples(recensement, view)
+				// new Service10DepartementsPlusPeuples(recensement, view)
 				break;
 			case "6":
-				//new Service10VillesDeDepartementPlusPeuplees(recensement, view)
+				// new Service10VillesDeDepartementPlusPeuplees(recensement, view)
 				break;
 			case "7":
-				//new Service10VillesDeRegionPlusPeuplees(recensement, view)
+				// new Service10VillesDeRegionPlusPeuplees(recensement, view)
 				break;
 			case "8":
-				//new Service10VillesPlusPeuplees(recensement, view)
+				// new Service10VillesPlusPeuplees(recensement, view)
 				break;
 			case "9":
 				leave = true;

@@ -12,9 +12,20 @@ public class View {
 	}
 	
 	public void afficherMenuPrincipal() {
-		//TODO texte du menu principal
+
+		System.out.println("Que faire ?");
+		System.out.println("1 - Afficher les informations sur une ville");
+		System.out.println("2 - Calculer la population d'un departement");
+		System.out.println("3 - Calculer la population d'une region");
+		System.out.println("4 - Afficher les 10 regions les plus peuplees");
+		System.out.println("5 - Afficher les 10 departements les plus peuples");
+		System.out.println("6 - Afficher les 10 villes les plus peuplees d'un departement");
+		System.out.println("7 - Afficher les 10 villes les plus peuplees d'une region");
+		System.out.println("8 - Afficher les 10 villes les plus peuplees de France");
+		System.out.println("9 - Sortir");
 	}
 	
+	//TODO ajouter des fonctions d entree utilisateur pour selectionner des entrees valides
 	public String getEntreeUtilisateur() {
 		return scanner.nextLine();
 	}
