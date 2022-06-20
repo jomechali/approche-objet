@@ -43,6 +43,7 @@ public class Application {
 				break;
 			case "6":
 				// new Service10VillesDeDepartementPlusPeuplees(recensement, view)
+				new AfficherVillesMajeuresDepartement().traiter(recensement, view);
 				break;
 			case "7":
 				// new Service10VillesDeRegionPlusPeuplees(recensement, view)

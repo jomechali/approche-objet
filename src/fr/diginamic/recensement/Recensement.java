@@ -43,9 +43,7 @@ public class Recensement {
 					Integer.parseInt(data[5].replace(" ", "")), data[6], Integer.parseInt(data[9].replace(" ", "")));
 			villes.add(villeLue);
 		}
-
-		villes.sort(new ComparatorRegion());
-
+		
 		initialiserRegionsEtDepartements();
 
 	}
