@@ -2,6 +2,12 @@ package fr.diginamic.recensement;
 
 import java.util.Objects;
 
+/**
+ * Classe qui implement le service : rechercher les informations d une ville
+ * @author Joseph
+ *
+ */
+
 public class RechercherPopulationVille extends MenuService {
 
 	@Override

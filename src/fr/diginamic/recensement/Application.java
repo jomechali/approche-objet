@@ -24,6 +24,7 @@ public class Application {
 				break;
 			case "2":
 				//new ServicePopDepartement(recensement, view)
+				new RechercherPopulationDepartement().traiter(recensement, view);
 				break;
 			case "3":
 				//new ServicePopregion(recensement, view)
