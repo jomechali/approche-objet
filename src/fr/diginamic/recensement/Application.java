@@ -6,6 +6,7 @@ public class Application {
 
 	public static void main(String[] args) throws IOException {
 
+		//TODO passer ca en argument
 		Recensement recensement = new Recensement(
 				"D:\\SpringWorkspaceDirectory\\workspace-spring-tool-suite-4-4.14.1.RELEASE\\approche-objet\\src\\fichier\\recensement.csv");
 

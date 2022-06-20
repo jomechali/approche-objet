@@ -5,11 +5,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class Recensement {
 
+	// remplacer par des hashset?
 	private List<Ville> villes; // liste triee par nom region, puis code departement
+	private List<Departement> departements;
+	private List<Region> regions;
 
 	/**
 	 * Constructeur a partir d un fichier respectant le format de l exemple
@@ -34,22 +39,116 @@ public class Recensement {
 		villes = new ArrayList<>();
 		for (String villeCSV : villesCSV) {
 			String[] data = villeCSV.split(";");
-			villes.add(new Ville(Integer.parseInt(data[0].replace(" ", "")), data[1], data[2],
-					Integer.parseInt(data[5].replace(" ", "")), data[6], Integer.parseInt(data[9].replace(" ", ""))));
+			Ville villeLue = new Ville(Integer.parseInt(data[0].replace(" ", "")), data[1], data[2],
+					Integer.parseInt(data[5].replace(" ", "")), data[6], Integer.parseInt(data[9].replace(" ", "")));
+			villes.add(villeLue);
 		}
-		
+
 		villes.sort(new ComparatorRegion());
 
+		initialiserRegionsEtDepartements();
+
 	}
-	
-	//TODO cas de villes homonymes
-	
+
+	private void initialiserRegionsEtDepartements() {
+
+		departements = new ArrayList<>();
+		regions = new ArrayList<>();
+
+		// pour chaque ville
+		for (Ville ville : villes) {
+
+			// departement
+			Departement departementDeLaVille = trouverDepartementParCode(ville.getCodeDepartement());
+			if (Objects.isNull(departementDeLaVille)) {
+				departementDeLaVille = new Departement(new ArrayList<>(), ville.getCodeDepartement());
+				departements.add(departementDeLaVille);
+			}
+
+			departementDeLaVille.ajouterVille(ville);
+			ville.setDepartement(departementDeLaVille);
+
+			// region
+			Region regionDeLaVille = trouverRegion(ville.getCodeRegion());
+			if (Objects.isNull(regionDeLaVille)) {
+				regionDeLaVille = new Region(new ArrayList<>(), ville.getCodeRegion(), ville.getNomRegion());
+				regions.add(regionDeLaVille);
+			}
+			regionDeLaVille.ajouterVille(ville);
+			ville.setRegion(regionDeLaVille);
+		}
+	}
+
+	/**
+	 * Cherche un departement avec son code
+	 * @param code
+	 * @return le departement si trouve, null sinon
+	 */
+	public Departement trouverDepartementParCode(String code) {
+		boolean trouve = false;
+
+		Iterator<Departement> iterator = departements.iterator();
+		Departement departement = null;
+		while (iterator.hasNext() && !trouve) {
+			departement = (Departement) iterator.next();
+			trouve = departement.getCode().equals(code);
+		}
+
+		if (trouve) {
+			return departement;
+		}
+		return null;
+	}
+
+	/**
+	 * Cherche une region par son code
+	 * @param code
+	 * @return la region si trouve, null sinon
+	 */
+	public Region trouverRegion(int code) {
+		boolean trouve = false;
+
+		Iterator<Region> iterator = regions.iterator();
+		Region region = null;
+		while (iterator.hasNext() && !trouve) {
+			region = (Region) iterator.next();
+			trouve = region.getCode() == code;
+		}
+
+		if (trouve) {
+			return region;
+		}
+		return null;
+	}
+
+	/**
+	 * Cherche une region par son nom
+	 * @param nom
+	 * @return la region si trouve, null sinon
+	 */
+	public Region trouverRegion(String nom) {
+		boolean trouve = false;
+
+		Iterator<Region> iterator = regions.iterator();
+		Region region = null;
+		while (iterator.hasNext() && !trouve) {
+			region = (Region) iterator.next();
+			trouve = region.getNom().equals(nom);
+		}
+
+		if (trouve) {
+			return region;
+		}
+		return null;
+	}
+	// TODO cas de villes homonymes
+
 	/**
 	 * @param nomVille
 	 * @return l objet qui represente la ville recherchee
 	 */
 	public Ville trouverVilleParNom(String nomVille) {
-		
+
 		int index = 0;
 		Ville villeRecherchee = villes.get(index);
 
@@ -57,52 +156,26 @@ public class Recensement {
 			index++;
 			villeRecherchee = villes.get(index);
 		}
-		
+
 		if (!villeRecherchee.getNomCommune().equals(nomVille)) {
 			System.err.println("ville non trouvee");
 			return null;
 		}
-		
+
 		return villeRecherchee;
-		
+
 	}
-	
-	//TODO le sublist donne un acces en ecriture, il faut passer une copie profonde
+
+	// TODO acces en ecriture, il faut passer une copie profonde?
 
 	/**
 	 * @param codeRegion de la region choisie
 	 * @return la liste des villes de la region
 	 */
 	public List<Ville> villesDansRegion(int codeRegion) {
-		
-		// trouver le premier index de ville qui correspond a la region
-		int premierIndex = 0;
-		Ville villeTestee = villes.get(premierIndex);
-		
-		while ((premierIndex < villes.size() - 1) && (villeTestee.getCodeRegion() != codeRegion)) {
-			premierIndex++;
-			villeTestee = villes.get(premierIndex);
-		}
-		
-		if (villeTestee.getCodeRegion() != codeRegion) {
-			System.err.println("le code region n'a pas ete trouvé");
-			return null;
-		}
-		
-		// trouver le dernier index des villes de la region
-		// villeTestee est la premiere ville de la liste appartenant a la region recherchee, et premierIndex sa position dans la liste
-		int dernierIndex = premierIndex + 1;
-		villeTestee = villes.get(dernierIndex);
-		while ((dernierIndex < villes.size() - 1) && (villeTestee.getCodeRegion() == codeRegion)) {
-			dernierIndex++;
-			villeTestee = villes.get(dernierIndex);
-		}
-		// pour respecter les bornes de sublist
-		if (villeTestee.getCodeRegion() == codeRegion) {
-			dernierIndex++;
-		}
-		
-		return villes.subList(premierIndex, dernierIndex);
+
+		Region region = trouverRegion(codeRegion);
+		return region.getVilles();
 
 	}
 
@@ -111,76 +184,19 @@ public class Recensement {
 	 * @return la liste des villes de la region
 	 */
 	public List<Ville> villesDansRegion(String nomRegion) {
-		
-		// trouver le premier index de ville qui correspond a la region
-		int premierIndex = 0;
-		Ville villeTestee = villes.get(premierIndex);
-		
-		while ((premierIndex < villes.size() - 1) && (!villeTestee.getNomRegion().equals(nomRegion))) {
-			premierIndex++;
-			villeTestee = villes.get(premierIndex);
-		}
-		
-		if (!villeTestee.getNomRegion().equals(nomRegion)) {
-			System.err.println("le nom de la region n'a pas ete trouvé");
-			return null;
-		}
-		
-		// trouver le dernier index des villes de la region
-		// villeTestee est la premiere ville de la liste appartenant a la region recherchee, et premierIndex sa position dans la liste
-		int dernierIndex = premierIndex + 1;
-		villeTestee = villes.get(dernierIndex);
-		while ((dernierIndex < villes.size() - 1) && (villeTestee.getNomRegion().equals(nomRegion))) {
-			dernierIndex++;
-			villeTestee = villes.get(dernierIndex);
-		}
-		// pour respecter les bornes de sublist
-		if (villeTestee.getNomRegion().equals(nomRegion)) {
-			dernierIndex++;
-		}
-		
-		return villes.subList(premierIndex, dernierIndex);
+
+		return trouverRegion(nomRegion).getVilles();
 
 	}
-	
-	
+
 	/**
 	 * @param codeDepartement du departement choisi
 	 * @return la liste des villes du departement
 	 */
 	public List<Ville> villesDansDepartement(String codeDepartement) {
-		
-		// trouver le premier index de ville qui correspond au departement
-		int premierIndex = 0;
-		Ville villeTestee = villes.get(premierIndex);
-		
-		while ((premierIndex < villes.size() - 1) && (!villeTestee.getCodeDepartement().equals(codeDepartement))) {
-			premierIndex++;
-			villeTestee = villes.get(premierIndex);
-		}
-		
-		if (!villeTestee.getCodeDepartement().equals(codeDepartement)) {
-			System.err.println("le nom de la region n'a pas ete trouvé");
-			return null;
-		}
-		
-		// trouver le dernier index des villes du departement
-		// villeTestee est la premiere ville de la liste appartenant au departement recherche, et premierIndex sa position dans la liste
-		int dernierIndex = premierIndex + 1;
-		villeTestee = villes.get(dernierIndex);
-		while ((dernierIndex < villes.size() - 1) && (villeTestee.getCodeDepartement().equals(codeDepartement))) {
-			dernierIndex++;
-			villeTestee = villes.get(dernierIndex);
-		}
-		// pour respecter les bornes de sublist
-		if (villeTestee.getCodeDepartement().equals(codeDepartement)) {
-			dernierIndex++;
-		}
-		
-		return villes.subList(premierIndex, dernierIndex);
+
+		return trouverDepartementParCode(codeDepartement).getVilles();
 
 	}
-	
-	
 
 }

@@ -8,6 +8,10 @@ public class Ville {
 	private int codeCommune;
 	private String nomCommune;
 	private int populationTotale;
+	
+	private Region region;
+	private Departement departement;
+	
 	/**
 	 * @param codeRegion
 	 * @param nomRegion
@@ -26,7 +30,30 @@ public class Ville {
 		this.nomCommune = nomCommune;
 		this.populationTotale = populationTotale;
 	}
-	
+
+	/**
+	 * @param codeRegion
+	 * @param nomRegion
+	 * @param codeDepartement
+	 * @param codeCommune
+	 * @param nomCommune
+	 * @param populationTotale
+	 * @param region
+	 * @param departement
+	 */
+	public Ville(int codeRegion, String nomRegion, String codeDepartement, int codeCommune, String nomCommune,
+			int populationTotale, Region region, Departement departement) {
+		super();
+		this.codeRegion = codeRegion;
+		this.nomRegion = nomRegion;
+		this.codeDepartement = codeDepartement;
+		this.codeCommune = codeCommune;
+		this.nomCommune = nomCommune;
+		this.populationTotale = populationTotale;
+		this.region = region;
+		this.departement = departement;
+	}
+
 	@Override
 	public String toString() {
 		return "Ville [codeRegion=" + codeRegion + ", nomRegion=" + nomRegion + ", codeDepartement=" + codeDepartement
@@ -105,6 +132,34 @@ public class Ville {
 	 */
 	public void setPopulationTotale(int populationTotale) {
 		this.populationTotale = populationTotale;
+	}
+
+	/**
+	 * @return the region
+	 */
+	public Region getRegion() {
+		return region;
+	}
+
+	/**
+	 * @return the departement
+	 */
+	public Departement getDepartement() {
+		return departement;
+	}
+
+	/**
+	 * @param region the region to set
+	 */
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	/**
+	 * @param departement the departement to set
+	 */
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
 	}
 	
 }
