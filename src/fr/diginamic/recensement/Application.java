@@ -47,6 +47,7 @@ public class Application {
 				break;
 			case "7":
 				// new Service10VillesDeRegionPlusPeuplees(recensement, view)
+				new AfficherVillesMajeuresRegion().traiter(recensement, view);
 				break;
 			case "8":
 				// new Service10VillesPlusPeuplees(recensement, view)

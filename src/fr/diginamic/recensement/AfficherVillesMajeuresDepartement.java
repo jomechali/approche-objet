@@ -12,12 +12,14 @@ public class AfficherVillesMajeuresDepartement extends MenuService {
 		String codeDepartement = view.getEntreeUtilisateur();
 
 		try {
+			
+			Departement departement = recensement.trouverDepartementParCode(codeDepartement);
 
-			List<Ville> villes = recensement.trouverDepartementParCode(codeDepartement).getVilles();
+			List<Ville> villes = departement.getVilles();
 
 			villes.sort(new ComparatorPopulationVille());
 
-			view.afficher("Les villes les plus peuplees du " + codeDepartement + " sont :");
+			view.afficher("Les villes les plus peuplees du " + departement + " sont :");
 			for (int i = 0; i < 10; i++) {
 				view.afficher(villes.get(villes.size() - 1 - i).toString());
 			}
