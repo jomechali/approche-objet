@@ -51,6 +51,7 @@ public class Application {
 				break;
 			case "8":
 				// new Service10VillesPlusPeuplees(recensement, view)
+				new AfficherPlusGrandesVillesDeFrance().traiter(recensement, view);
 				break;
 			case "9":
 				leave = true;
