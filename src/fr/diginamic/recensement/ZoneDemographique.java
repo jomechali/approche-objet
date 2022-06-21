@@ -22,6 +22,7 @@ public class ZoneDemographique {
 
 	/**
 	 * Ajoute une ville
+	 * 
 	 * @param nouvelleVille
 	 */
 	public void ajouterVille(Ville nouvelleVille) {
@@ -30,10 +31,17 @@ public class ZoneDemographique {
 
 	/**
 	 * Calcule la population totale
+	 * 
 	 * @return
 	 */
 	public int populationTotale() {
-		return OutilsDemographiques.calculerPopulation(villes);
+
+		int popTotale = 0;
+
+		for (Ville ville : villes) {
+			popTotale += ville.getPopulationTotale();
+		}
+		return popTotale;
 	}
 
 	/**

@@ -17,8 +17,7 @@ import java.util.Objects;
  */
 public class Recensement {
 
-	// remplacer par des hashset?
-	private List<Ville> villes; // liste triee par nom region, puis code departement
+	private List<Ville> villes;
 	private List<Departement> departements;
 	private List<Region> regions;
 
@@ -40,12 +39,11 @@ public class Recensement {
 		List<String> villesCSV = Files.readAllLines(pathObject);
 		villesCSV.remove(0); // la ligne des noms de colonnes
 
-
 		// Parsing
 		departements = new ArrayList<>();
 		regions = new ArrayList<>();
 		villes = new ArrayList<>();
-		
+
 		for (String villeCSV : villesCSV) {
 
 			// lire la donnee
@@ -58,11 +56,10 @@ public class Recensement {
 			int populationTotale = Integer.parseInt(data[9].replace(" ", ""));
 
 			// Creer la ville
-			Ville villeLue = new Ville(codeCommune, nomCommune,
-					populationTotale);
+			Ville villeLue = new Ville(codeCommune, nomCommune, populationTotale);
 
 			villes.add(villeLue);
-			
+
 			// Creer ou mettre a jour le departement
 			Departement departementDeLaVille = trouverDepartementParCode(codeDepartement);
 			if (Objects.isNull(departementDeLaVille)) {
@@ -84,7 +81,6 @@ public class Recensement {
 		}
 
 	}
-
 
 	/**
 	 * Cherche un departement avec son code
@@ -184,8 +180,7 @@ public class Recensement {
 	 */
 	public List<Ville> villesDansRegion(int codeRegion) {
 
-		Region region = trouverRegion(codeRegion);
-		return region.getVilles();
+		return trouverRegion(codeRegion).getVilles();
 
 	}
 

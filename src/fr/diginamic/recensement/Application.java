@@ -6,9 +6,10 @@ public class Application {
 
 	public static void main(String[] args) throws IOException {
 
-		//TODO passer ca en argument
-		Recensement recensement = new Recensement(
-				"D:\\SpringWorkspaceDirectory\\workspace-spring-tool-suite-4-4.14.1.RELEASE\\approche-objet\\src\\fichier\\recensement.csv");
+		// args[0] contient le path du fichier de recensement
+		// "D:\\SpringWorkspaceDirectory\\workspace-spring-tool-suite-4-4.14.1.RELEASE\\approche-objet\\src\\fichier\\recensement.csv"
+
+		Recensement recensement = new Recensement(args[0]);
 
 		View view = new View();
 
@@ -22,35 +23,35 @@ public class Application {
 
 			switch (entreeUtilisateur) {
 			case "1":
-				// new ServiceAfficherVille().traiter(recensement, view)
+				// afficher les informations sur une ville
 				new RechercherPopulationVille().traiter(recensement, view);
 				break;
 			case "2":
-				// new ServicePopDepartement(recensement, view)
+				// rechercher la population d un departement
 				new RechercherPopulationDepartement().traiter(recensement, view);
 				break;
 			case "3":
-				// new ServicePopregion(recensement, view)
+				// rechercher la population d une region
 				new RechercherPopulationRegion().traiter(recensement, view);
 				break;
 			case "4":
-				// new Service10RegionsplusPeuplees(recensement, view)
+				// afficher les 10 regions les plus peuplees
 				new AfficherRegionsPlusPeuplees().traiter(recensement, view);
 				break;
 			case "5":
-				// new Service10DepartementsPlusPeuples(recensement, view)
+				// afficher les 10 departements les plus peuples
 				new AfficherDepartementsPlusPeuples().traiter(recensement, view);
 				break;
 			case "6":
-				// new Service10VillesDeDepartementPlusPeuplees(recensement, view)
+				// afficher les 10 plus grandes villes d un departement
 				new AfficherVillesMajeuresDepartement().traiter(recensement, view);
 				break;
 			case "7":
-				// new Service10VillesDeRegionPlusPeuplees(recensement, view)
+				// afiicher les 10 plus grandes villesd une region
 				new AfficherVillesMajeuresRegion().traiter(recensement, view);
 				break;
 			case "8":
-				// new Service10VillesPlusPeuplees(recensement, view)
+				// afficher les 10 plus grandes villes de France
 				new AfficherPlusGrandesVillesDeFrance().traiter(recensement, view);
 				break;
 			case "9":
