@@ -2,6 +2,13 @@ package fr.diginamic.recensement;
 
 import java.util.Comparator;
 
+/**
+ * Comparator pour trier les villes en fonction du nom de leur region, puis de
+ * leur departement
+ * 
+ * @author Joseph
+ *
+ */
 public class ComparatorRegion implements Comparator<Ville> {
 
 	@Override

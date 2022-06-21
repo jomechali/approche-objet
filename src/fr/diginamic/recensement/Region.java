@@ -2,11 +2,17 @@ package fr.diginamic.recensement;
 
 import java.util.List;
 
+/**
+ * Classe qui reprensente une region
+ * 
+ * @author Joseph
+ *
+ */
 public class Region extends ZoneDemographique {
-	
+
 	private int code;
 	private String nom;
-	
+
 	/**
 	 * @param villes
 	 * @param code
@@ -17,20 +23,20 @@ public class Region extends ZoneDemographique {
 		this.code = code;
 		this.nom = nom;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 
 		if (obj == this) {
 			return true;
 		}
-		
-		if(!(obj instanceof Region)) {
+
+		if (!(obj instanceof Region)) {
 			return false;
 		}
 		return code == ((Region) obj).code;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Region [code=" + code + ", nom=" + nom + "]";

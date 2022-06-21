@@ -7,16 +7,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * Classe qui implemente le service : afficher les 10 departements les plus
+ * peuples
+ * 
+ * @author Joseph
+ *
+ */
 public class AfficherDepartementsPlusPeuples extends MenuService {
 
 	@Override
 	public void traiter(Recensement recensement, View view) {
-		
+
 		HashMap<ZoneDemographique, Integer> populationDepartementale = new HashMap<>();
 		for (Departement departement : recensement.getDepartements()) {
 			populationDepartementale.put(departement, departement.populationTotale());
 		}
-		
+
 		List<Map.Entry<ZoneDemographique, Integer>> populations = new ArrayList<>(populationDepartementale.entrySet());
 		Collections.sort(populations, new ComparatorEntry());
 

@@ -2,8 +2,14 @@ package fr.diginamic.recensement;
 
 import java.util.List;
 
+/**
+ * Classe generique pour designer un regroupement de villes
+ * 
+ * @author Joseph
+ *
+ */
 public class ZoneDemographique {
-	
+
 	private List<Ville> villes;
 
 	/**
@@ -13,11 +19,19 @@ public class ZoneDemographique {
 		super();
 		this.villes = villes;
 	}
-	
+
+	/**
+	 * Ajoute une ville
+	 * @param nouvelleVille
+	 */
 	public void ajouterVille(Ville nouvelleVille) {
 		villes.add(nouvelleVille);
 	}
-	
+
+	/**
+	 * Calcule la population totale
+	 * @return
+	 */
 	public int populationTotale() {
 		return OutilsDemographiques.calculerPopulation(villes);
 	}
@@ -28,6 +42,5 @@ public class ZoneDemographique {
 	public List<Ville> getVilles() {
 		return villes;
 	}
-
 
 }

@@ -2,6 +2,12 @@ package fr.diginamic.recensement;
 
 import java.util.List;
 
+/**
+ * Classe qui represente un departement
+ * 
+ * @author Joseph
+ *
+ */
 public class Departement extends ZoneDemographique {
 
 	private String code;
@@ -14,15 +20,15 @@ public class Departement extends ZoneDemographique {
 		super(villes);
 		this.code = code;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 
 		if (obj == this) {
 			return true;
 		}
-		
-		if(!(obj instanceof Departement)) {
+
+		if (!(obj instanceof Departement)) {
 			return false;
 		}
 		return code.equals(((Departement) obj).code);
@@ -39,6 +45,5 @@ public class Departement extends ZoneDemographique {
 	public String getCode() {
 		return code;
 	}
-	
 
 }

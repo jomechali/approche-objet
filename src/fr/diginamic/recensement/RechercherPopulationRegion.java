@@ -11,9 +11,8 @@ public class RechercherPopulationRegion extends MenuService {
 	@Override
 	public void traiter(Recensement recensement, View view) {
 
-		view.afficher("Entrer le code de la region ou le nom de la region");
-
-		String entreeUtilisateur = view.getEntreeUtilisateur();
+		String entreeUtilisateur = view.getRegion();
+		
 		try {
 
 			int populationTotale = 0;

@@ -2,6 +2,13 @@ package fr.diginamic.recensement;
 
 import java.util.List;
 
+/**
+ * Classe qui implemente le service : afficher les 10 plusu grandes villes de
+ * France
+ * 
+ * @author Joseph
+ *
+ */
 public class AfficherPlusGrandesVillesDeFrance extends MenuService {
 
 	@Override
@@ -12,10 +19,8 @@ public class AfficherPlusGrandesVillesDeFrance extends MenuService {
 		villes.sort(new ComparatorPopulationVille());
 
 		view.afficher("Les plus grandes villes de France sont :");
-	
-		for (int i = 0; i < 10; i++) {
-			view.afficher(villes.get(villes.size() - 1 - i).toString());
-		}
+
+		view.afficherCollection(villes.subList(Math.max(villes.size() - 11, 0), villes.size()));
 	}
 
 }

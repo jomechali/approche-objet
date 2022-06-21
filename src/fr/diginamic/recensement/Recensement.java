@@ -9,6 +9,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Contient les donnees et des methodes pour les manipuler
+ * 
+ * @author Joseph
+ *
+ */
 public class Recensement {
 
 	// remplacer par des hashset?
@@ -34,51 +40,55 @@ public class Recensement {
 		List<String> villesCSV = Files.readAllLines(pathObject);
 		villesCSV.remove(0); // la ligne des noms de colonnes
 
-		// parsing
 
-		villes = new ArrayList<>();
-		for (String villeCSV : villesCSV) {
-			String[] data = villeCSV.split(";");
-			Ville villeLue = new Ville(Integer.parseInt(data[0].replace(" ", "")), data[1], data[2],
-					Integer.parseInt(data[5].replace(" ", "")), data[6], Integer.parseInt(data[9].replace(" ", "")));
-			villes.add(villeLue);
-		}
-		
-		initialiserRegionsEtDepartements();
-
-	}
-
-	private void initialiserRegionsEtDepartements() {
-
+		// Parsing
 		departements = new ArrayList<>();
 		regions = new ArrayList<>();
+		villes = new ArrayList<>();
+		
+		for (String villeCSV : villesCSV) {
 
-		// pour chaque ville
-		for (Ville ville : villes) {
+			// lire la donnee
+			String[] data = villeCSV.split(";");
+			int codeRegion = Integer.parseInt(data[0].replace(" ", ""));
+			String nomRegion = data[1];
+			String codeDepartement = data[2];
+			int codeCommune = Integer.parseInt(data[5].replace(" ", ""));
+			String nomCommune = data[6];
+			int populationTotale = Integer.parseInt(data[9].replace(" ", ""));
 
-			// departement
-			Departement departementDeLaVille = trouverDepartementParCode(ville.getCodeDepartement());
+			// Creer la ville
+			Ville villeLue = new Ville(codeCommune, nomCommune,
+					populationTotale);
+
+			villes.add(villeLue);
+			
+			// Creer ou mettre a jour le departement
+			Departement departementDeLaVille = trouverDepartementParCode(codeDepartement);
 			if (Objects.isNull(departementDeLaVille)) {
-				departementDeLaVille = new Departement(new ArrayList<>(), ville.getCodeDepartement());
+				departementDeLaVille = new Departement(new ArrayList<>(), codeDepartement);
 				departements.add(departementDeLaVille);
 			}
 
-			departementDeLaVille.ajouterVille(ville);
-			ville.setDepartement(departementDeLaVille);
+			departementDeLaVille.ajouterVille(villeLue);
+			villeLue.setDepartement(departementDeLaVille);
 
-			// region
-			Region regionDeLaVille = trouverRegion(ville.getCodeRegion());
+			// Creer ou mettre a jour la region
+			Region regionDeLaVille = trouverRegion(codeRegion);
 			if (Objects.isNull(regionDeLaVille)) {
-				regionDeLaVille = new Region(new ArrayList<>(), ville.getCodeRegion(), ville.getNomRegion());
+				regionDeLaVille = new Region(new ArrayList<>(), codeRegion, nomRegion);
 				regions.add(regionDeLaVille);
 			}
-			regionDeLaVille.ajouterVille(ville);
-			ville.setRegion(regionDeLaVille);
+			regionDeLaVille.ajouterVille(villeLue);
+			villeLue.setRegion(regionDeLaVille);
 		}
+
 	}
+
 
 	/**
 	 * Cherche un departement avec son code
+	 * 
 	 * @param code
 	 * @return le departement si trouve, null sinon
 	 */
@@ -100,6 +110,7 @@ public class Recensement {
 
 	/**
 	 * Cherche une region par son code
+	 * 
 	 * @param code
 	 * @return la region si trouve, null sinon
 	 */
@@ -121,6 +132,7 @@ public class Recensement {
 
 	/**
 	 * Cherche une region par son nom
+	 * 
 	 * @param nom
 	 * @return la region si trouve, null sinon
 	 */
@@ -217,7 +229,5 @@ public class Recensement {
 	public List<Region> getRegions() {
 		return regions;
 	}
-	
-	
 
 }

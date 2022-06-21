@@ -7,16 +7,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * Classe qui implemente le service : afficher les 10 regions les plus peuplees
+ * 
+ * @author Joseph
+ *
+ */
 public class AfficherRegionsPlusPeuplees extends MenuService {
 
 	@Override
 	public void traiter(Recensement recensement, View view) {
-		
+
 		HashMap<ZoneDemographique, Integer> populationRegionale = new HashMap<>();
 		for (Region region : recensement.getRegions()) {
 			populationRegionale.put(region, region.populationTotale());
 		}
-		
+
 		List<Map.Entry<ZoneDemographique, Integer>> populations = new ArrayList<>(populationRegionale.entrySet());
 		Collections.sort(populations, new ComparatorEntry());
 

@@ -13,9 +13,7 @@ public class RechercherPopulationDepartement extends MenuService {
 	@Override
 	public void traiter(Recensement recensement, View view) {
 
-		view.afficher("Entrer le code du departement : ");
-
-		String codeDepartement = view.getEntreeUtilisateur();
+		String codeDepartement = view.getCodeDepartement();
 
 		try {
 			int popTotale = recensement.trouverDepartementParCode(codeDepartement).populationTotale();

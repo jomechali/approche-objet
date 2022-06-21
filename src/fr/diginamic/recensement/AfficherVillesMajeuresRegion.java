@@ -2,14 +2,19 @@ package fr.diginamic.recensement;
 
 import java.util.List;
 
+/**
+ * Classe qui implemente le service : afficher les 10 plus grandes villes d une
+ * region
+ * 
+ * @author Joseph
+ *
+ */
 public class AfficherVillesMajeuresRegion extends MenuService {
 
 	@Override
 	public void traiter(Recensement recensement, View view) {
 
-		view.afficher("Entrer le code de la region ou le nom de la region");
-
-		String entreeUtilisateur = view.getEntreeUtilisateur();
+		String entreeUtilisateur = view.getRegion();
 		try {
 
 			Region region;
@@ -17,23 +22,18 @@ public class AfficherVillesMajeuresRegion extends MenuService {
 				int codeRegion = Integer.parseInt(entreeUtilisateur);
 
 				region = recensement.trouverRegion(codeRegion);
-				
-			} catch (NumberFormatException e) {
 
+			} catch (NumberFormatException e) {
 
 				region = recensement.trouverRegion(entreeUtilisateur);
 			}
-			
 
-			
 			List<Ville> villes = region.getVilles();
 			villes.sort(new ComparatorPopulationVille());
-			
+
 			view.afficher("Les villes les plus peuplees de la " + region + " sont :");
-			
-			for (int i = 0; i < 10; i++) {
-				view.afficher(villes.get(villes.size() - 1 - i).toString());
-			}
+
+			view.afficherCollection(villes.subList(Math.max(villes.size() - 11, 0), villes.size()));
 
 		} catch (NullPointerException e) {
 
