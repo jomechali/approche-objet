@@ -26,6 +26,17 @@ public class Ville {
 				+ ", popTotale=" + popTotale + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+
+		if (!(obj instanceof Ville)) {
+			return false;
+		}
+		Ville ville = (Ville) obj;
+		
+		return (nom.equals(ville.nom) && codeDepartement.equals(ville.codeDepartement) 
+				&& nomRegion.equals(ville.nomRegion) && popTotale == ville.popTotale);
+	}
 	/**
 	 * @return the relevant data in the writing format
 	 */
